@@ -1,5 +1,4 @@
 import { useFetchData } from "../hooks/useFetchData";
-// import { useParamsContext } from "../context/ParamsContext";
 
 export class ChartData {
   public fetchedData;
@@ -8,8 +7,6 @@ export class ChartData {
     const { data } = useFetchData({
       limit: "35000",
       order: "ASC",
-      initialDate: 1,
-      lastDate: 1,
     });
 
     this.fetchedData = data;
@@ -33,5 +30,56 @@ export class ChartData {
     const arraySum = paramSumArray.reduce((a, b) => a + b, 0);
 
     return { paramSumArray, arraySum };
+  }
+
+  public getParamSumPerRegion(param: string) {
+    const receivedData = this.fetchedData;
+
+    let regions: string[] = [];
+    let state: string;
+    let paramArrayPerRegion: number[] = [];
+    let conversionArray: number[] = [];
+
+    receivedData.forEach((region) => {
+      if (region.estado) {
+        state = region.estado.toUpperCase();
+      }
+
+      if (region.estado && !regions.includes(state)) {
+        regions.push(state);
+      }
+    });
+
+    regions.forEach((region) => {
+      let PPSum = 0;
+      let CPCASum = 0;
+      let paramSum = 0;
+
+      receivedData.forEach((row) => {
+        if (row.estado === region) {
+          PPSum += row["pp"];
+          CPCASum += row["cpca"];
+          paramSum += row[`${param}`];
+        }
+      });
+
+      paramArrayPerRegion.push(paramSum);
+      conversionArray.push(Math.floor((PPSum / CPCASum) * 100));
+    });
+
+    const percentageArray = this.percentageCalc(paramArrayPerRegion);
+    return { regions, conversionArray, percentageArray, paramArrayPerRegion };
+  }
+
+  private percentageCalc(valuesArray: number[]) {
+    const arraySum: number = valuesArray.reduce((a, b) => a + b, 0);
+    let percentageArray: number[] = [];
+
+    valuesArray.forEach((value) => {
+      const percentage = (value / arraySum) * 100;
+      percentageArray.push(percentage);
+    });
+
+    return percentageArray;
   }
 }

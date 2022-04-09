@@ -5,13 +5,16 @@ export type Params = {
   setStartDate: React.Dispatch<React.SetStateAction<Date>>;
   finalDate: Date;
   setFinalDate: React.Dispatch<React.SetStateAction<Date>>;
+  indicator: string;
+  setIndicator: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const Context = createContext<Params>(undefined!);
 
 export const ParamsProvider: React.FC = ({ children }) => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [finalDate, setFinalDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date(2019, 3, 5));
+  const [finalDate, setFinalDate] = useState(new Date(2019, 3, 5));
+  const [indicator, setIndicator] = useState<string>("alo");
 
   return (
     <Context.Provider
@@ -20,6 +23,8 @@ export const ParamsProvider: React.FC = ({ children }) => {
         setStartDate: setStartDate,
         finalDate: finalDate,
         setFinalDate: setFinalDate,
+        indicator: indicator,
+        setIndicator: setIndicator,
       }}
     >
       {children}

@@ -1,5 +1,5 @@
 import { Flex, IconButton, Link } from "@chakra-ui/react";
-import { FiHome, FiMenu, FiUser } from "react-icons/fi";
+import { FiCalendar, FiGlobe, FiMenu } from "react-icons/fi";
 
 import React, { useState } from "react";
 
@@ -9,6 +9,7 @@ import NextLink from "next/link";
 interface SidebarProps {}
 
 export const Sidebar: React.FC<SidebarProps> = ({}) => {
+  const [whichActive, setActive] = useState<number>(1);
   const [navSize, changeNavSize] = useState<"large" | "small">("large");
 
   return (
@@ -41,18 +42,33 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
           aria-label={""}
         />
         <NextLink href="/" passHref>
-          <Link w="100%">
+          <Link
+            w="100%"
+            onClick={() => {
+              setActive(1);
+            }}
+          >
             <NavItem
               navSize={navSize}
-              icon={FiHome}
+              icon={FiCalendar}
               title="Dashboard Hora"
-              active
+              active={whichActive === 1}
             />
           </Link>
         </NextLink>
         <NextLink href="/region" passHref>
-          <Link w="100%">
-            <NavItem navSize={navSize} icon={FiUser} title="Regiao" />
+          <Link
+            w="100%"
+            onClick={() => {
+              setActive(2);
+            }}
+          >
+            <NavItem
+              navSize={navSize}
+              icon={FiGlobe}
+              title="Regiao"
+              active={whichActive === 2}
+            />
           </Link>
         </NextLink>
       </Flex>
