@@ -24,18 +24,17 @@ export const NavItem: React.FC<NavItemProps> = ({
     >
       <Menu placement="right">
         <Link
-          backgroundColor={active ? "#AEC8CA" : "none"}
-          p={3}
+          backgroundColor={active ? "#c0d6e4" : "none"}
           borderRadius={8}
-          _hover={{ textDecor: "none", backgroundColor: "#AEC8CA" }}
+          _hover={{ textDecor: "none", backgroundColor: "#c0d6e4" }}
           w={navSize == "large" ? "100%" : "none"}
         >
           <MenuButton w="100%">
-            <Flex>
+            <Flex p={3}>
               <Icon
                 as={icon}
                 fontSize="xl"
-                color={active ? "teal.500" : "gray.400"}
+                color={active ? "#008ffb" : "gray.400"}
               />
               <Text ml="5" display={navSize == "small" ? "none" : "flex"}>
                 {title}

@@ -1,17 +1,10 @@
-import { Flex, IconButton } from "@chakra-ui/react";
-import {
-  FiBriefcase,
-  FiDollarSign,
-  FiHome,
-  FiMenu,
-  FiSettings,
-  FiUser,
-} from "react-icons/fi";
-import { IoPawOutline } from "react-icons/io5";
+import { Flex, IconButton, Link } from "@chakra-ui/react";
+import { FiHome, FiMenu, FiUser } from "react-icons/fi";
 
 import React, { useState } from "react";
 
 import { NavItem } from "./NavItem";
+import NextLink from "next/link";
 
 interface SidebarProps {}
 
@@ -47,13 +40,21 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
           }}
           aria-label={""}
         />
-        <NavItem navSize={navSize} icon={FiHome} title="Dashboard" active />
-        <NavItem navSize={navSize} icon={FiUser} title="About" />
-        <NavItem navSize={navSize} icon={FiUser} title="Clients" />
-        <NavItem navSize={navSize} icon={IoPawOutline} title="Animals" />
-        <NavItem navSize={navSize} icon={FiDollarSign} title="Stocks" />
-        <NavItem navSize={navSize} icon={FiBriefcase} title="Reports" />
-        <NavItem navSize={navSize} icon={FiSettings} title="Settings" />
+        <NextLink href="/" passHref>
+          <Link w="100%">
+            <NavItem
+              navSize={navSize}
+              icon={FiHome}
+              title="Dashboard Hora"
+              active
+            />
+          </Link>
+        </NextLink>
+        <NextLink href="/region" passHref>
+          <Link w="100%">
+            <NavItem navSize={navSize} icon={FiUser} title="Regiao" />
+          </Link>
+        </NextLink>
       </Flex>
     </Flex>
   );
