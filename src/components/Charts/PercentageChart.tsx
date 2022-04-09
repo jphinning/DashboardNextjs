@@ -16,7 +16,7 @@ export const PercentageChart: React.FC<PercentageChartProps> = ({
   const percentage = Math.floor((PPSum / CPCAprSum) * 100);
 
   const state: ChartProps = {
-    series: [percentage],
+    series: [percentage | 0],
     options: {
       title: {
         text: "% Conversão em Promessa",
@@ -56,6 +56,9 @@ export const PercentageChart: React.FC<PercentageChartProps> = ({
         labels: {
           useSeriesColors: false,
         },
+        onItemClick: {
+          toggleDataSeries: false,
+        },
       },
     },
   };
@@ -66,7 +69,7 @@ export const PercentageChart: React.FC<PercentageChartProps> = ({
       series={state.series}
       type="radialBar"
       height="400"
-      width="20vw"
+      // width="20vw"
     />
   );
 };

@@ -4,9 +4,9 @@ import { useParamsContext } from "../../context/ParamsContext";
 import { DateBox } from "../Cards/DateBox";
 import "react-datepicker/dist/react-datepicker.css";
 
-interface SortingCardsProps {}
+interface SortingCardsHourProps {}
 
-export const SoringCards: React.FC<SortingCardsProps> = ({}) => {
+export const SortingCardsHour: React.FC<SortingCardsHourProps> = ({}) => {
   const { startDate, setStartDate, finalDate, setFinalDate } =
     useParamsContext();
 

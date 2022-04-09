@@ -1,10 +1,10 @@
 import React from "react";
-import { Body } from "../components/Body";
+import { RegionBody } from "../components/RegionBodyComponents/RegionBody";
 
 interface RegionProps {}
 
 const Region: React.FC<RegionProps> = ({}) => {
-  return <Body />;
+  return <RegionBody />;
 };
 
 export default Region;

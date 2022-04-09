@@ -13,9 +13,8 @@ interface data {
 }
 
 export function useFetchData({ limit, order }: IUseDataProps) {
-  const { startDate, finalDate } = useParamsContext();
+  const { startDate, finalDate, indicator } = useParamsContext();
   const [data, setData] = useState<data[]>([]);
-  console.log(startDate.toISOString().split("T")[0]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +31,7 @@ export function useFetchData({ limit, order }: IUseDataProps) {
     };
 
     fetchData();
-  }, [startDate, finalDate]);
+  }, [startDate, finalDate, indicator]);
 
   return { data };
 }
