@@ -1,5 +1,4 @@
 import { useFetchData } from "../hooks/useFetchData";
-// import { useParamsContext } from "../context/ParamsContext";
 
 export class ChartData {
   public fetchedData;
@@ -8,8 +7,6 @@ export class ChartData {
     const { data } = useFetchData({
       limit: "35000",
       order: "ASC",
-      initialDate: 1,
-      lastDate: 1,
     });
 
     this.fetchedData = data;

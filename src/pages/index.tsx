@@ -1,5 +1,5 @@
-import { Body } from "../components/Body";
+import { HourBody } from "../components/HourBodyComponents/HourBody";
 
-const Index = () => <Body />;
+const Index = () => <HourBody />;
 
 export default Index;

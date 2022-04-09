@@ -1,31 +1,29 @@
 import { useState, useEffect } from "react";
 
 import axiosHttp from "../config/axiosHttp";
+import { useParamsContext } from "../context/ParamsContext";
 
 export interface IUseDataProps {
   limit: string;
   order: "ASC" | "DESC";
-  initialDate: number;
-  lastDate: number;
 }
 
 interface data {
   [k: string]: any;
 }
 
-export function useFetchData({
-  limit,
-  order,
-  initialDate,
-  lastDate,
-}: IUseDataProps) {
+export function useFetchData({ limit, order }: IUseDataProps) {
+  const { startDate, finalDate } = useParamsContext();
   const [data, setData] = useState<data[]>([]);
+  console.log(startDate.toISOString().split("T")[0]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await axiosHttp.get(
-          `indicators?limit=${limit}&order=${order}&initialDate=${initialDate}&lastDate=${lastDate}`
+          `indicators?limit=${limit}&order=${order}&initialDate=${
+            startDate.toISOString().split("T")[0]
+          }&lastDate=${finalDate.toISOString().split("T")[0]}`
         );
         setData(data);
       } catch (error) {
@@ -34,7 +32,7 @@ export function useFetchData({
     };
 
     fetchData();
-  }, []);
+  }, [startDate, finalDate]);
 
   return { data };
 }

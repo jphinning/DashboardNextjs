@@ -1,5 +1,5 @@
 import { Flex, IconButton, Link } from "@chakra-ui/react";
-import { FiHome, FiMenu, FiUser } from "react-icons/fi";
+import { FiCalendar, FiGlobe, FiMenu } from "react-icons/fi";
 
 import React, { useState } from "react";
 
@@ -44,7 +44,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
           <Link w="100%">
             <NavItem
               navSize={navSize}
-              icon={FiHome}
+              icon={FiCalendar}
               title="Dashboard Hora"
               active
             />
@@ -52,7 +52,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
         </NextLink>
         <NextLink href="/region" passHref>
           <Link w="100%">
-            <NavItem navSize={navSize} icon={FiUser} title="Regiao" />
+            <NavItem navSize={navSize} icon={FiGlobe} title="Regiao" />
           </Link>
         </NextLink>
       </Flex>

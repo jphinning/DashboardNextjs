@@ -64,16 +64,16 @@ export const MultipleAxis: React.FC<MultipleAxisProps> = ({
       yaxis: [
         { seriesName: "ALO" },
         {
-          seriesName: "CPC",
+          seriesName: `CPC: ${cpcAxis.arraySum.toLocaleString("pt-br")}`,
           opposite: true,
         },
         {
-          seriesName: "CPC",
+          seriesName: `CPC: ${cpcAxis.arraySum.toLocaleString("pt-br")}`,
           opposite: true,
           show: false,
         },
         {
-          seriesName: "CPC",
+          seriesName: `CPC: ${cpcAxis.arraySum.toLocaleString("pt-br")}`,
           opposite: true,
           show: false,
         },
