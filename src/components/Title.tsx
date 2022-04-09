@@ -7,7 +7,7 @@ interface TitleProps {
 
 export const Title: React.FC<TitleProps> = ({ title }) => {
   return (
-    <Flex mb={5}>
+    <Flex my={5}>
       <Heading size="sm">{title} </Heading>
     </Flex>
   );

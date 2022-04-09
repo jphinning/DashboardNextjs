@@ -1,28 +1,22 @@
-import { Box, Flex, Heading } from "@chakra-ui/react";
-import React, { useState } from "react";
-import DatePicker from "react-datepicker";
+import { Flex } from "@chakra-ui/react";
+import React from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import { IoCalendarClear } from "react-icons/io5";
+
+import { DateBox } from "./Cards/DateBox";
+import { MenuBox } from "./Cards/MenuBox";
+import { useParamsContext } from "../context/ParamsContext";
 
 interface SortingParamsProps {}
 
 export const SortingParams: React.FC<SortingParamsProps> = ({}) => {
-  const [startDate, setStartDate] = useState(new Date());
-  console.log(startDate);
+  const { startDate, setStartDate, finalDate, setFinalDate } =
+    useParamsContext();
+
   return (
-    <Flex>
-      <Box boxShadow="md" borderRadius="md" width={"auto"} p="3">
-        <Heading as="em" size="xs" color="gray.500">
-          Data inicial
-        </Heading>
-        <Flex gap="1">
-          <DatePicker
-            selected={startDate}
-            onChange={(date: Date) => setStartDate(date)}
-          />
-          <IoCalendarClear />
-        </Flex>
-      </Box>
+    <Flex gap="3">
+      <MenuBox title="Indicador" />
+      <DateBox title="Data Inicial" date={startDate} setDate={setStartDate} />
+      <DateBox title="Data Final" date={finalDate} setDate={setFinalDate} />
     </Flex>
   );
 };
