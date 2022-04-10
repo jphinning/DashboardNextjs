@@ -13,7 +13,6 @@ const ChartLineRegion: React.FC<ChartLineRegionProps> = ({}) => {
 
   const paramPerRegion = fetchedData.getParamSumPerRegion(indicator);
   const percentage = paramPerRegion.percentageArray;
-  console.log(percentage[25]);
 
   return (
     <Flex mt="10" gap={3}>
