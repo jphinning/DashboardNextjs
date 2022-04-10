@@ -9,6 +9,8 @@ export class ChartData {
       order: "ASC",
     });
 
+    console.log(process.env.BACKEND_URL);
+
     this.fetchedData = data;
   }
 
