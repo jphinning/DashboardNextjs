@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import useSWR from "swr";
 
 import axiosHttp from "../config/axiosHttp";
 import { useParamsContext } from "../context/ParamsContext";
@@ -8,30 +8,22 @@ export interface IUseDataProps {
   order: "ASC" | "DESC";
 }
 
-interface data {
+export interface Idata {
   [k: string]: any;
 }
 
 export function useFetchData({ limit, order }: IUseDataProps) {
-  const { startDate, finalDate, indicator } = useParamsContext();
-  const [data, setData] = useState<data[]>([]);
+  const { startDate, finalDate } = useParamsContext();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axiosHttp.get(
-          `indicators?limit=${limit}&order=${order}&initialDate=${
-            startDate.toISOString().split("T")[0]
-          }&lastDate=${finalDate.toISOString().split("T")[0]}`
-        );
-        setData(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const url = `indicators?limit=${limit}&order=${order}&initialDate=${
+    startDate.toISOString().split("T")[0]
+  }&lastDate=${finalDate.toISOString().split("T")[0]}`;
 
-    fetchData();
-  }, [startDate, finalDate, indicator]);
+  const { data, error } = useSWR<Idata[], Error>(url, async (url) => {
+    const response = await axiosHttp.get(url);
 
-  return { data };
+    return response.data;
+  });
+
+  return { data, error, isLoading: !error && !data };
 }
