@@ -28,7 +28,7 @@ const ChartLine: React.FC<ChartLineProps> = ({}) => {
           CPCAprSum={yAxisCPCApvChart.arraySum}
         />
       </Box>
-      <Box boxShadow="md" borderRadius="md" mr="3">
+      <Box boxShadow="md" borderRadius="md" mr="3" w="70%">
         <MultipleAxis
           aloAxis={yAxisAloChart}
           xAxis={xAxis}

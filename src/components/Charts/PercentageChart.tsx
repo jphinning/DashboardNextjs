@@ -26,16 +26,33 @@ export const PercentageChart: React.FC<PercentageChartProps> = ({
       },
       plotOptions: {
         radialBar: {
+          offsetY: 40,
           startAngle: -90,
           endAngle: 90,
           hollow: {
+            margin: 5,
             size: "50%",
+          },
+          track: {
+            background: "#e7e7e7",
+            strokeWidth: "97%",
+            margin: 10, // margin is in pixels
+            dropShadow: {
+              enabled: true,
+              top: 2,
+              left: 0,
+              color: "#999",
+              opacity: 1,
+              blur: 2,
+            },
           },
           dataLabels: {
             name: {
               show: false,
             },
+
             value: {
+              offsetY: -2,
               fontSize: "30px",
             },
           },
@@ -52,14 +69,28 @@ export const PercentageChart: React.FC<PercentageChartProps> = ({
         fontSize: "12px",
         position: "bottom",
         offsetX: 0,
-        offsetY: -40,
+        offsetY: 0,
         labels: {
           useSeriesColors: false,
         },
         onItemClick: {
           toggleDataSeries: false,
         },
+        itemMargin: {
+          horizontal: 5,
+          vertical: 0,
+        },
       },
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            legend: {
+              show: false,
+            },
+          },
+        },
+      ],
     },
   };
 
