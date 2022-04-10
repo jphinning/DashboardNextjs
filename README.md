@@ -1,24 +1,31 @@
-# Dashboard with [chakra-ui](https://github.com/chakra-ui/chakra-ui) and TypeScript
+# Dashboard with Nextjs and TypeScript :heavy_check_mark:
 
-Dashboard with Nextjs
+Dashboard frontend made with Nextjs and Typescript
 
-## Deployment
+## Vercel Deployment :computer:
 
-Vercel url
+See the app in action at https://dashboard-nextjs-peach.vercel.app/
 
-## Requirements
+## Requirements :rocket:
 
-node 17.3.0
-npm 8.5.1
+```
+npm or yarn installed
+```
 
-## How to Run it
+## How to Run it :running:
 
+Make sure the backend is running if you want to see chart data
+
+```bash
+git clone git@github.com:jphinning/DashboardNextjs.git
+cd DashboardNextjs
 npm run dev
+```
 
-## Observations
+## Observations :electric_plug:
 
-Backend
+If you want to see the backend go to this repo: https://github.com/jphinning/DashboardBackend
 
-## App in action
+## App in action :coffee:
 
-[GIF]
+![Alt Text](https://media.giphy.com/media/gkdz4ln9IUtfaiC9g6/giphy.gif)
