@@ -15,6 +15,9 @@ export class ChartData {
   public getParamSumPerHour(hours: number[], param: string) {
     let paramSumArray: number[] = [];
     const receivedData = this.fetchedData;
+
+    if (!receivedData) return { paramSumArray: [0], arraySum: 0 };
+
     hours.forEach((hour) => {
       let paramSum = 0;
 
@@ -34,6 +37,14 @@ export class ChartData {
 
   public getParamSumPerRegion(param: string) {
     const receivedData = this.fetchedData;
+
+    if (!receivedData)
+      return {
+        regions: [""],
+        conversionArray: [0],
+        percentageArray: [0],
+        paramArrayPerRegion: [0],
+      };
 
     let regions: string[] = [];
     let state: string;

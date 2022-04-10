@@ -1,5 +1,5 @@
 import { Box, Flex, Heading } from "@chakra-ui/react";
-import React from "react";
+import React, { memo } from "react";
 import { useParamsContext } from "../../context/ParamsContext";
 import { ChartData } from "../../services/indicatorData";
 import { BarChart } from "../Charts/BarChart";
@@ -7,7 +7,7 @@ import { ParamPercentage } from "../Charts/ParamPercentage";
 
 interface ChartLineRegionProps {}
 
-export const ChartLineRegion: React.FC<ChartLineRegionProps> = ({}) => {
+const ChartLineRegion: React.FC<ChartLineRegionProps> = ({}) => {
   const { indicator } = useParamsContext();
   const fetchedData = new ChartData();
 
@@ -65,3 +65,5 @@ export const ChartLineRegion: React.FC<ChartLineRegionProps> = ({}) => {
     </Flex>
   );
 };
+
+export default memo(ChartLineRegion);

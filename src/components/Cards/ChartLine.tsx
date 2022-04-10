@@ -1,12 +1,12 @@
 import { Box, Flex } from "@chakra-ui/react";
-import React from "react";
+import React, { memo } from "react";
 import { ChartData } from "../../services/indicatorData";
 import { MultipleAxis } from "../Charts/MultipleAxis";
 import { PercentageChart } from "../Charts/PercentageChart";
 
 interface ChartLineProps {}
 
-export const ChartLine: React.FC<ChartLineProps> = ({}) => {
+const ChartLine: React.FC<ChartLineProps> = ({}) => {
   const fetchedData = new ChartData();
 
   const xAxis = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
@@ -40,3 +40,5 @@ export const ChartLine: React.FC<ChartLineProps> = ({}) => {
     </Flex>
   );
 };
+
+export default memo(ChartLine);

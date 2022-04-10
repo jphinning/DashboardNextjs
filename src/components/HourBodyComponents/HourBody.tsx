@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
-import { ChartLine } from "../Cards/ChartLine";
+import ChartLine from "../Cards/ChartLine";
 import { Title } from "../Title";
 import { SortingCardsHour } from "./SortingCardsHour";
 
