@@ -13,6 +13,7 @@ const ChartLineRegion: React.FC<ChartLineRegionProps> = ({}) => {
 
   const paramPerRegion = fetchedData.getParamSumPerRegion(indicator);
   const percentage = paramPerRegion.percentageArray;
+  const { conversionArray } = fetchedData.getConvertionArray();
 
   return (
     <Flex mt="10" gap={3}>
@@ -36,14 +37,14 @@ const ChartLineRegion: React.FC<ChartLineRegionProps> = ({}) => {
         />
         <ParamPercentage
           percentageArray={percentage}
-          index={17}
+          index={15}
           label="Paraná"
           indicator={indicator.toUpperCase()}
           paramSumArray={paramPerRegion.paramArrayPerRegion}
         />
         <ParamPercentage
           percentageArray={percentage}
-          index={10}
+          index={12}
           label="Minas Gerais"
           indicator={indicator.toUpperCase()}
           paramSumArray={paramPerRegion.paramArrayPerRegion}
@@ -58,7 +59,7 @@ const ChartLineRegion: React.FC<ChartLineRegionProps> = ({}) => {
       >
         <BarChart
           xAxis={paramPerRegion.regions}
-          conversionRate={paramPerRegion.conversionArray}
+          conversionRate={conversionArray}
         />
       </Box>
     </Flex>

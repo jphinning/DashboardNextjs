@@ -47,6 +47,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
             onClick={() => {
               setActive(1);
             }}
+            mt="5"
           >
             <NavItem
               navSize={navSize}
@@ -59,6 +60,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
         <NextLink href="/region" passHref>
           <Link
             w="100%"
+            mt="5"
             onClick={() => {
               setActive(2);
             }}

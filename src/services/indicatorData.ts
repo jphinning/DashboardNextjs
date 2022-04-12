@@ -1,96 +1,83 @@
-import { useFetchData } from "../hooks/useFetchData";
+import {
+  useFetchDataGroupedBy,
+  IUserDataProps,
+} from "../hooks/useFetchDataGroupedBy";
+import { useFetchDataSum } from "../hooks/useFetchDataSum";
 
 export class ChartData {
-  public fetchedData;
-
-  constructor() {
-    const { data } = useFetchData({
-      limit: "35000",
+  public getParamSumPerHour(
+    param: IUserDataProps["indicator"],
+    sortBy: IUserDataProps["sortBy"]
+  ) {
+    // Return sum of array grouped by hour and the parameter sum
+    const { dataGroupedBy } = useFetchDataGroupedBy({
       order: "ASC",
+      indicator: param,
+      sortBy: sortBy,
     });
 
-    this.fetchedData = data;
-  }
+    const { dataSum } = useFetchDataSum({ indicator: param });
 
-  public getParamSumPerHour(hours: number[], param: string) {
-    let paramSumArray: number[] = [];
-    const receivedData = this.fetchedData;
+    if (!dataGroupedBy || !dataSum) return { paramSumArray: [0], arraySum: 0 };
 
-    if (!receivedData) return { paramSumArray: [0], arraySum: 0 };
-
-    hours.forEach((hour) => {
-      let paramSum = 0;
-
-      receivedData.forEach((row) => {
-        if (row.hora === hour) {
-          paramSum += row[`${param}`];
-        }
-      });
-
-      paramSumArray.push(paramSum);
-    });
-
-    const arraySum = paramSumArray.reduce((a, b) => a + b, 0);
+    const paramSumArray = dataGroupedBy.map((obj) => obj.sum);
+    const arraySum = dataSum.map((obj) => obj.sum)[0];
 
     return { paramSumArray, arraySum };
   }
 
-  public getParamSumPerRegion(param: string) {
-    const receivedData = this.fetchedData;
+  public getParamSumPerRegion(param: IUserDataProps["indicator"]) {
+    const { dataGroupedBy } = useFetchDataGroupedBy({
+      order: "ASC",
+      indicator: param,
+      sortBy: "estado",
+    });
 
-    if (!receivedData)
+    const { dataSum } = useFetchDataSum({ indicator: param });
+
+    if (!dataGroupedBy || !dataSum)
       return {
-        regions: [""],
-        conversionArray: [0],
+        regions: [" "],
         percentageArray: [0],
         paramArrayPerRegion: [0],
       };
 
-    let regions: string[] = [];
-    let state: string;
-    let paramArrayPerRegion: number[] = [];
-    let conversionArray: number[] = [];
+    const regions = dataGroupedBy
+      .map((obj) => obj.estado)
+      .filter((value) => value != null);
+    const paramArrayPerRegion = dataGroupedBy.map((obj) => obj.sum);
+    const arraySum = dataSum.map((obj) => obj.sum)[0];
 
-    receivedData.forEach((region) => {
-      if (region.estado) {
-        state = region.estado.toUpperCase();
-      }
+    const percentageArray = dataGroupedBy.map(
+      (obj) => (obj.sum / arraySum) * 100
+    );
 
-      if (region.estado && !regions.includes(state)) {
-        regions.push(state);
-      }
-    });
-
-    regions.forEach((region) => {
-      let PPSum = 0;
-      let CPCASum = 0;
-      let paramSum = 0;
-
-      receivedData.forEach((row) => {
-        if (row.estado === region) {
-          PPSum += row["pp"];
-          CPCASum += row["cpca"];
-          paramSum += row[`${param}`];
-        }
-      });
-
-      paramArrayPerRegion.push(paramSum);
-      conversionArray.push(Math.floor((PPSum / CPCASum) * 100));
-    });
-
-    const percentageArray = this.percentageCalc(paramArrayPerRegion);
-    return { regions, conversionArray, percentageArray, paramArrayPerRegion };
+    return {
+      regions,
+      percentageArray,
+      paramArrayPerRegion,
+    };
   }
 
-  private percentageCalc(valuesArray: number[]) {
-    const arraySum: number = valuesArray.reduce((a, b) => a + b, 0);
-    let percentageArray: number[] = [];
-
-    valuesArray.forEach((value) => {
-      const percentage = (value / arraySum) * 100;
-      percentageArray.push(percentage);
+  public getConvertionArray() {
+    const { dataGroupedBy: cpcaArray } = useFetchDataGroupedBy({
+      order: "ASC",
+      indicator: "cpca",
+      sortBy: "estado",
     });
 
-    return percentageArray;
+    const { dataGroupedBy: ppArray } = useFetchDataGroupedBy({
+      order: "ASC",
+      indicator: "pp",
+      sortBy: "estado",
+    });
+
+    if (!ppArray || !cpcaArray) return { conversionArray: [0] };
+
+    const conversionArray = ppArray.map((ppobj, index) =>
+      Math.round((ppobj.sum / cpcaArray[index].sum) * 100)
+    );
+
+    return { conversionArray };
   }
 }

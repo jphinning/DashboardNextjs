@@ -13,8 +13,10 @@ import React from "react";
 
 interface MenuBoxProps {
   title: string;
-  indicator: string;
-  setIndicator: (value: React.SetStateAction<string>) => void;
+  indicator: "alo" | "cpc" | "cpca" | "pp";
+  setIndicator: (
+    value: React.SetStateAction<"alo" | "cpc" | "cpca" | "pp">
+  ) => void;
 }
 
 export const MenuBox: React.FC<MenuBoxProps> = ({

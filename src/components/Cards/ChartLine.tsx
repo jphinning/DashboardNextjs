@@ -12,10 +12,10 @@ const ChartLine: React.FC<ChartLineProps> = ({}) => {
   const xAxis = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
 
   // const t1 = performance.now();
-  const yAxisAloChart = fetchedData.getParamSumPerHour(xAxis, "alo");
-  const yAxisCPCChart = fetchedData.getParamSumPerHour(xAxis, "cpc");
-  const yAxisCPCApvChart = fetchedData.getParamSumPerHour(xAxis, "cpca");
-  const yAxisPPChart = fetchedData.getParamSumPerHour(xAxis, "pp");
+  const yAxisAloChart = fetchedData.getParamSumPerHour("alo", "hora");
+  const yAxisCPCChart = fetchedData.getParamSumPerHour("cpc", "hora");
+  const yAxisCPCApvChart = fetchedData.getParamSumPerHour("cpca", "hora");
+  const yAxisPPChart = fetchedData.getParamSumPerHour("pp", "hora");
   // const t2 = performance.now();
 
   // console.log(`Performace: ${t2 - t1} ms`);
