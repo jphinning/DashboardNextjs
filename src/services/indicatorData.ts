@@ -18,12 +18,14 @@ export class ChartData {
 
     const { dataSum } = useFetchDataSum({ indicator: param });
 
-    if (!dataGroupedBy || !dataSum) return { paramSumArray: [0], arraySum: 0 };
+    if (!dataGroupedBy || !dataSum)
+      return { paramSumArray: [0], arraySum: 0, hours: [0] };
 
     const paramSumArray = dataGroupedBy.map((obj) => obj.sum);
+    const hours = dataGroupedBy.map((obj) => obj.hora);
     const arraySum = dataSum.map((obj) => obj.sum)[0];
 
-    return { paramSumArray, arraySum };
+    return { paramSumArray, arraySum, hours };
   }
 
   public getParamSumPerRegion(param: IUserDataProps["indicator"]) {

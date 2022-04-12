@@ -9,8 +9,6 @@ interface ChartLineProps {}
 const ChartLine: React.FC<ChartLineProps> = ({}) => {
   const fetchedData = new ChartData();
 
-  const xAxis = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
-
   // const t1 = performance.now();
   const yAxisAloChart = fetchedData.getParamSumPerHour("alo", "hora");
   const yAxisCPCChart = fetchedData.getParamSumPerHour("cpc", "hora");
@@ -31,7 +29,7 @@ const ChartLine: React.FC<ChartLineProps> = ({}) => {
       <Box boxShadow="md" borderRadius="md" mr="3" w="70%">
         <MultipleAxis
           aloAxis={yAxisAloChart}
-          xAxis={xAxis}
+          xAxis={yAxisAloChart.hours}
           cpcAxis={yAxisCPCChart}
           cpcApvAxis={yAxisCPCApvChart}
           ppAxis={yAxisPPChart}
